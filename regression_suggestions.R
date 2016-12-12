@@ -1,3 +1,28 @@
+percent <- function(x, digits = 2, format = "f", ...) {
+  paste0(formatC(100 * x, format = format, digits = digits, ...), "%")
+}
+
+remove_outliers <- function(x, na.rm = TRUE, ...) {
+  qnt <- quantile(x, probs=c(.25, .75), na.rm = na.rm, ...)
+  H <- 1.5 * IQR(x, na.rm = na.rm)
+  y <- x
+  y[x < (qnt[1] - H)] <- NA
+  y[x > (qnt[2] + H)] <- NA
+  y
+}
+
+intPlot <-function(v,name,target){
+  plot(density(na.omit(v)), main=paste(name,"(before)"))
+  polygon(density(na.omit(v)), col="red", border="blue")
+  plot(target, v, pch=21, 
+       main=paste(name," vs response"))
+  qqnorm(v)
+}
+
+catPlot <-function(v,name){
+  plot(v)
+}
+
 suggest<-function (v,target){
   suppressWarnings(require(moments))
   par(mfrow=c(2,3))

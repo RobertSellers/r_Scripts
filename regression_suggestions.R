@@ -22,7 +22,10 @@ intPlot <-function(v,name,target){
 
 catPlot <-function(v,name,target){
   plot(v,main=name)
-  mosaicplot(target~v,main = name,xlab = "", ylab="Target", cex = 0.75, color = TRUE)
+  box(lty = '1373', col = 'black')
+  plot(v,Target,main = name,xlab = "", ylab="Target", cex = 0.75, color = TRUE)
+  box(lty = '1373', col = 'black')
+  
 }
 
 suggest<-function (v,target){
@@ -91,7 +94,7 @@ suggest<-function (v,target){
 }
 
 predictorPlots<-function (v,target){
-  par(mfrow=c(2,3))
+  par(mfrow=c(2,4))
   i<-0
   for(j in names(v)){
     i<-i+1

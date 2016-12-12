@@ -37,7 +37,7 @@ predictorPlots<-function (v,target){
     #  if(sum(is.na(v[colnames(v)[i] ]))/nrow(v)>0){
     #    catPlot(v[,i],colnames(v)[i],target)
     #  }
-    }
+    # }
   }
 }
 

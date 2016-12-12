@@ -55,7 +55,7 @@ plotPCA<-function(train){
   p + geom_text(data=loadings, 
   mapping=aes(x = PC1, y = PC2, label = .names, colour = .names)) +
   coord_fixed(ratio=1) + labs(x = "PC1", y = "PC2")
-  return (data.pca,p)
+  return (c(data.pca,p))
 }
 
 

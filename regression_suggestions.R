@@ -33,11 +33,13 @@ predictorPlots<-function (v,target){
     if(sapply(v[colnames(v)[i] ], class)=='integer'){
       intPlot(v[,i],colnames(v)[i],target)
     }
-    #else if(sapply(v[colnames(v)[i] ], class)=='factor'){
+    else if(sapply(v[colnames(v)[i] ], class)=='factor'){
+      # DISABLED
     #  if(sum(is.na(v[colnames(v)[i] ]))/nrow(v)>0){
     #    catPlot(v[,i],colnames(v)[i],target)
     #  }
-    # }
+
+    }
   }
 }
 

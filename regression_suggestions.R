@@ -45,8 +45,6 @@ predictorPlots<-function (v,target){
 plotPCA<-function(train){
   suppressWarnings(require(ggplot2))
   par(mar = rep(2, 4))
-  data.pca<-prcomp(train,center = TRUE,scale. = TRUE,retx=TRUE)
-  #summary(data.pca)
   theta <- seq(0,2*pi,length.out = 100)
   circle <- data.frame(x = cos(theta), y = sin(theta))
   p <- ggplot(circle,aes(x,y)) + geom_path()
@@ -55,7 +53,7 @@ plotPCA<-function(train){
   p + geom_text(data=loadings, 
   mapping=aes(x = PC1, y = PC2, label = .names, colour = .names)) +
   coord_fixed(ratio=1) + labs(x = "PC1", y = "PC2")
-  return (c(data.pca,p))
+  
 }
 
 

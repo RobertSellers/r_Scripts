@@ -100,7 +100,7 @@ predictorPlots<-function (v,target){
       intPlot(v[,i],colnames(v)[i],target)
     }else if(sapply(v[colnames(v)[i] ], class)=='factor'){
       if(sum(is.na(v[colnames(v)[i] ]))/nrow(v)>0){
-        catPlot(v[,i],colnames(v)[i])
+        catPlot(v[,i],colnames(v)[i]target)
       }
     }
   }

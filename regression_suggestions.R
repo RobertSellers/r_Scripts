@@ -1,3 +1,5 @@
+suppressWarnings(require(moments))
+
 percent <- function(x, digits = 2, format = "f", ...) {
   paste0(formatC(100 * x, format = format, digits = digits, ...), "%")
 }
@@ -19,13 +21,12 @@ intPlot <-function(v,name,target){
   qqnorm(v)
 }
 
-catPlot <-function(v,name){
+catPlot <-function(v,name,target){
   plot(v)
+  mosaicplot(target~v,main = name,xlab = "", ylab="Target", cex = 0.75, color = TRUE)
 }
 
 suggest<-function (v,target){
-  suppressWarnings(require(moments))
-  par(mfrow=c(2,3))
    sink("suggest.txt")
   i<-0
   for(j in names(v)){
@@ -67,9 +68,6 @@ suggest<-function (v,target){
           cat("\n")
         }
       }
-      
-      intPlot(v[,i],colnames(v)[i],target)
-      
     }else if(sapply(v[colnames(v)[i] ], class)=='factor'){
       cat(paste('Categorical', sapply(v[colnames(v)[i] ], class)))
       cat("\n")
@@ -85,11 +83,25 @@ suggest<-function (v,target){
         cat('Variable OK')
         cat("\n")
       }
-      catPlot(v[,i],colnames(v)[i])
     }
   }
    sink()
    file.show("suggest.txt")
    closeAllConnections()
   return (v)
+}
+
+predictorPlots<-function (v,target){
+  par(mfrow=c(2,3))
+  i<-0
+  for(j in names(v)){
+    i<-i+1
+    if(sapply(v[colnames(v)[i] ], class)=='integer'){
+      intPlot(v[,i],colnames(v)[i],target)
+    }else if(sapply(v[colnames(v)[i] ], class)=='factor'){
+      if(sum(is.na(v[colnames(v)[i] ]))/nrow(v)>0){
+        catPlot(v[,i],colnames(v)[i])
+      }
+    }
+  }
 }

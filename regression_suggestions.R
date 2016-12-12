@@ -23,9 +23,6 @@ intPlot <-function(v,name,target){
 catPlot <-function(v,name,target){
   plot(v,main=name)
   box(lty = '1373', col = 'black')
-  boxplot(v, main = name)
-  box(lty = '1373', col = 'black')
-  
 }
 
 predictorPlots<-function (v,target){
@@ -35,10 +32,11 @@ predictorPlots<-function (v,target){
     i<-i+1
     if(sapply(v[colnames(v)[i] ], class)=='integer'){
       intPlot(v[,i],colnames(v)[i],target)
-    }else if(sapply(v[colnames(v)[i] ], class)=='factor'){
-      if(sum(is.na(v[colnames(v)[i] ]))/nrow(v)>0){
-        catPlot(v[,i],colnames(v)[i],target)
-      }
+    }
+    #else if(sapply(v[colnames(v)[i] ], class)=='factor'){
+    #  if(sum(is.na(v[colnames(v)[i] ]))/nrow(v)>0){
+    #    catPlot(v[,i],colnames(v)[i],target)
+    #  }
     }
   }
 }

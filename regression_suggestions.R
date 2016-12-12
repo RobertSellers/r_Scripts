@@ -14,15 +14,14 @@ remove_outliers <- function(x, na.rm = TRUE, ...) {
 }
 
 intPlot <-function(v,name,target){
-  plot(density(na.omit(v)), main=paste(name,"(before)"))
+  plot(density(na.omit(v)), main=paste(name,"(Density)"))
   polygon(density(na.omit(v)), col="red", border="blue")
-  plot(target, v, pch=21, 
-       main=paste(name," vs response"))
-  qqnorm(v)
+  plot(target, v, pch=21,  main=paste(name," vs Response"))
+  qqnorm(v,main=paste(name,"Q-Q Plot"))
 }
 
 catPlot <-function(v,name,target){
-  plot(v)
+  plot(v,main=name)
   mosaicplot(target~v,main = name,xlab = "", ylab="Target", cex = 0.75, color = TRUE)
 }
 

@@ -23,9 +23,24 @@ intPlot <-function(v,name,target){
 catPlot <-function(v,name,target){
   plot(v,main=name)
   box(lty = '1373', col = 'black')
-  plot(v,target,main = name,xlab = "", ylab="Target", cex = 0.75, color = TRUE)
+  boxplot(v, main = name)
   box(lty = '1373', col = 'black')
   
+}
+
+predictorPlots<-function (v,target){
+  par(mfrow=c(2,4))
+  i<-0
+  for(j in names(v)){
+    i<-i+1
+    if(sapply(v[colnames(v)[i] ], class)=='integer'){
+      intPlot(v[,i],colnames(v)[i],target)
+    }else if(sapply(v[colnames(v)[i] ], class)=='factor'){
+      if(sum(is.na(v[colnames(v)[i] ]))/nrow(v)>0){
+        catPlot(v[,i],colnames(v)[i],target)
+      }
+    }
+  }
 }
 
 suggest<-function (v,target){
@@ -91,19 +106,4 @@ suggest<-function (v,target){
    file.show("suggest.txt")
    closeAllConnections()
   return (v)
-}
-
-predictorPlots<-function (v,target){
-  par(mfrow=c(2,4))
-  i<-0
-  for(j in names(v)){
-    i<-i+1
-    if(sapply(v[colnames(v)[i] ], class)=='integer'){
-      intPlot(v[,i],colnames(v)[i],target)
-    }else if(sapply(v[colnames(v)[i] ], class)=='factor'){
-      if(sum(is.na(v[colnames(v)[i] ]))/nrow(v)>0){
-        catPlot(v[,i],colnames(v)[i],target)
-      }
-    }
-  }
 }

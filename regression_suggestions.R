@@ -23,7 +23,7 @@ intPlot <-function(v,name,target){
 catPlot <-function(v,name,target){
   plot(v,main=name)
   box(lty = '1373', col = 'black')
-  plot(v,Target,main = name,xlab = "", ylab="Target", cex = 0.75, color = TRUE)
+  plot(v,target,main = name,xlab = "", ylab="Target", cex = 0.75, color = TRUE)
   box(lty = '1373', col = 'black')
   
 }
